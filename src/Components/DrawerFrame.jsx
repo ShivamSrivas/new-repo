@@ -356,7 +356,6 @@ export default function DrawerFrame() {
             <img src={ProfileLogo} alt="Logo" />
           </div>
         </DrawerHeader>
-        <LandingCard/>
         <PromptField/>
       </Box>
     </Box>
