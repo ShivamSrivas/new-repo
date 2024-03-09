@@ -34,7 +34,7 @@ const PromptField = () => {
         justifyContent: "flex-start",
         padding: "0px 17px",
         boxSizing: "border-box",
-        width: "60vw",
+        width: "60%",
         boxShadow: "0px -4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
