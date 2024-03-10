@@ -6,7 +6,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Investment from "../../src/images/Investment . AI.png";
 import LandingPageLogo from "../../src/images/LandPage-LOGO.png";
 import Timer from "../../src/images/Timer.png";
-import DigitalTime from "../../src/images/DigitalTime.png"
+import DigitalTime from "../../src/images/DigitalTime.png";
 import ProfileLogo from "../../src/images/ProfileLogo.png";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -23,6 +23,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import LandingCard from "./LandingCard";
 import PromptField from "./PromptField";
+import "../style/DrawerFrame.css";
 
 const drawerWidth = 240;
 
@@ -52,26 +53,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-}));
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
 }));
 
 const Drawer = styled(MuiDrawer, {
@@ -98,7 +80,7 @@ export default function DrawerFrame() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box className="drawerContainer">
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader
@@ -127,6 +109,7 @@ export default function DrawerFrame() {
                 }}
               >
                 <ListItemIcon
+                  className="listItemIcon"
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : "auto",
@@ -139,11 +122,7 @@ export default function DrawerFrame() {
                     color: "white",
                   }}
                 >
-                  <AddIcon
-                    sx={{
-                      fontSize: "14px",
-                    }}
-                  />
+                  <AddIcon className="addIcon" />
                   {open ? (
                     <span
                       style={{
@@ -226,8 +205,7 @@ export default function DrawerFrame() {
                         fontFamily: "Poppins, sans-serif",
                         fontWeight: 600,
                         fontStyle: "normal",
-                        // Matching padding with message-like structure
-                        marginBottom: "5px", // Adjusted spacing for consistency with messages
+                        marginBottom: "5px",
                       }}
                     />
                   </ListItemButton>
@@ -315,9 +293,18 @@ export default function DrawerFrame() {
           </div>
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, bgcolor: "#061101" ,display:"flex",flexDirection:"column",justifyContent:"space-between"
-      ,minHeight:"100vh"
-    }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          bgcolor: "#061101",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          minHeight: "100vh",
+        }}
+      >
         <DrawerHeader
           sx={{
             display: "flex",
@@ -342,22 +329,27 @@ export default function DrawerFrame() {
               alignItems: "center",
             }}
           >
-            <div style={{
-              display:"flex",
-              justifyContent:"center",
-              alignItems:"center",
-              marginRight:"1rem"
-            }}>
-            <img src={Timer} alt="Logo" />
-            <img src={DigitalTime}alt="logo" style={{marginTop:"0.5rem",marginLeft:"0.5rem"}}/>
-
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "1rem",
+              }}
+            >
+              <img src={Timer} alt="Logo" />
+              <img
+                src={DigitalTime}
+                alt="logo"
+                style={{ marginTop: "0.5rem", marginLeft: "0.5rem" }}
+              />
             </div>
-            
+
             <img src={ProfileLogo} alt="Logo" />
           </div>
         </DrawerHeader>
-        <LandingCard/>
-        <PromptField/>
+        <LandingCard />
+        <PromptField />
       </Box>
     </Box>
   );

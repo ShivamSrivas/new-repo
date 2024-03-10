@@ -1,38 +1,12 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
 import ESG from "../../src/images/ESG.png";
 import InvestmentManagement from "../../src/images/InvestmentManagement.png";
 import WealthManagement from "../../src/images/WealthManagement.png";
+import "../style/LandingCard.css";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export default function BasicGrid() {
-  const itemData = [
-    {
-      img: ESG,
-      title: "ESG",
-      style: { width: "230px", height: "291px" },
-    },
-    {
-      // img: WealthManagement,
-      title: "WealthManagement",
-      style: { width: "250px", height: "315px" },
-    },
-    {
-      img: InvestmentManagement,
-      title: "InvestmentManagement",
-      style: { width: "230px", height: "291px" },
-    },
-  ];
-
   return (
     <Grid
       container
@@ -64,7 +38,6 @@ export default function BasicGrid() {
             justifyContent: "flex-start",
             padding: "0px 37px 25px",
             boxSizing: "border-box",
-            marginRight: "33%",
             maxWidth: "100%",
           }}
         >
@@ -119,33 +92,12 @@ export default function BasicGrid() {
           display: "flex",
           justifyContent: "center",
         }}
-        
       >
         <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-start",
-            justifyContent: "center",
-            padding: "0px 20px 27px",
-            boxSizing: "border-box",
-            maxWidth: "100%",
-            textAlign: "center",
-            fontSize: "18px",
-            color: "#968864",
-            fontFamily: "Alata",
-          }}
+          className="content-container-outter"
         >
           <div
-            style={{
-              width: "754px",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "flex-end",
-              justifyContent: "flex-start",
-              gap: "0px 21.5px",
-              maxWidth: "100%",
-            }}
+           className="container"
           >
             <div
               style={{
@@ -230,7 +182,9 @@ export default function BasicGrid() {
                       fontFamily: "Poppins",
                       color: "white",
                     }}
-                  >{`Lorem ipsum dolor sit amet consectetur. Lobortis tempor enim libero risus nulla. `}</div>
+                  >
+                    {`Lorem ipsum dolor sit amet consectetur. Lobortis tempor enim libero risus nulla. `}
+                  </div>
                 </div>
               </div>
             </div>
@@ -331,7 +285,9 @@ export default function BasicGrid() {
                       fontFamily: "Poppins",
                       color: "white",
                     }}
-                  >{`ellus amet at aliquet auctor id vitae non amet tincidunt. Condimentum a neque natoque scelerisque varius vitae maecenas purus. `}</div>
+                  >
+                    {`ellus amet at aliquet auctor id vitae non amet tincidunt. Condimentum a neque natoque scelerisque varius vitae maecenas purus. `}
+                  </div>
                 </div>
               </div>
             </div>
