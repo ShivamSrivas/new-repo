@@ -2,7 +2,6 @@ import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
 import Investment from "../../src/images/Investment . AI.png";
 import LandingPageLogo from "../../src/images/LandPage-LOGO.png";
 import Timer from "../../src/images/Timer.png";
@@ -23,6 +22,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import LandingCard from "./LandingCard";
 import PromptField from "./PromptField";
+import ChatBox from "./ChatBox";
+import InitialCard from "./InitialCard";
 import "../style/DrawerFrame.css";
 
 const drawerWidth = 240;
@@ -349,6 +350,8 @@ export default function DrawerFrame() {
           </div>
         </DrawerHeader>
         <LandingCard />
+        {/* <ChatBox/> */}
+        {/* <InitialCard/> */}
         <PromptField />
       </Box>
     </Box>

@@ -1,0 +1,40 @@
+/* AnsweredList.module.css */
+
+.list {
+  background-color: transparent;
+  color: #ffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.list ul {
+  padding: 0;
+}
+
+.itemText::after {
+  content: attr(data-content);
+  animation: revealText 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+.iconButton {
+  color: #42ff54;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-self: flex-start;
+  animation: revealText 1s ease-in-out forwards;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+@keyframes revealText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
