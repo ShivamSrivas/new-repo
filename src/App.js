@@ -1,10 +1,18 @@
-import './App.css';
-import DrawerFrame from "./Components/DrawerFrame.jsx"
-import LandingCard from "./Components/LandingCard.jsx"
-import InitialCard from './Components/InitialCard.jsx';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import ChatList from "./pages/ChatList";
+import Cards from "./pages/Cards";
+
 function App() {
   return (
-  <DrawerFrame/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ChatList" element={<ChatList />} />
+        <Route path="/Cards" element={<Cards />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

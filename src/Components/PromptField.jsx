@@ -3,8 +3,10 @@ import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import StopCircleIcon from '@mui/icons-material/StopCircle';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import StopCircleIcon from "@mui/icons-material/StopCircle";
 
 const PromptField = () => {
   const [inputValue, setInputValue] = useState("");
@@ -45,14 +47,13 @@ const PromptField = () => {
     target.style.height = previousHeight; // Restore previous height
 
     // Set input height within min and max height limits
-    setInputHeight(`${Math.min(Math.max(scrollHeight, minHeight), maxHeight)}px`);
+    setInputHeight(
+      `${Math.min(Math.max(scrollHeight, minHeight), maxHeight)}px`
+    );
   };
 
-  const {
-    transcript,
-    resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
 
   useEffect(() => {
     if (!browserSupportsSpeechRecognition) {
@@ -83,14 +84,14 @@ const PromptField = () => {
         justifyContent: "flex-start",
         padding: "0px 17px",
         boxSizing: "border-box",
-        width: "60%",
+        width: "95%",
         boxShadow: "0px -4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
       <div
         style={{
           flex: "1",
-          borderRadius: "50px",
+          borderRadius: "80px",
           backgroundColor: "rgba(255, 255, 255, 0.2)",
           boxShadow: "0px 2px 37px 16px rgba(0, 0, 0, 0.07)",
           boxSizing: "border-box",
@@ -98,7 +99,7 @@ const PromptField = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "flex-start",
-          padding: "14px 28px 14px 30px",
+          padding: "0px 30px 0px 30px",
           maxWidth: "100%",
           gap: "20px",
         }}
@@ -114,7 +115,7 @@ const PromptField = () => {
             boxSizing: "border-box",
             fontFamily: "Alata",
             fontWeight: "500",
-            padding: "15px 0px 0px 0px",
+            padding: "26px 0px 0px 0px",
             fontSize: "16px",
             color: "white",
             resize: "none",
@@ -155,11 +156,7 @@ const PromptField = () => {
             }}
             onClick={toggleListening}
           >
-            {listening ? (
-              <StopCircleIcon />
-            ) : (
-              <KeyboardVoiceIcon />
-            )}
+            {listening ? <StopCircleIcon /> : <KeyboardVoiceIcon />}
           </IconButton>
         </div>
       </div>

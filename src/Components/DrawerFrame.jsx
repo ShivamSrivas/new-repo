@@ -73,7 +73,7 @@ const Drawer = styled(MuiDrawer, {
   ...(!open && closedMixin(theme)),
 }));
 
-export default function DrawerFrame() {
+export default function DrawerFrame(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const handleDrawerClose = () => {
@@ -349,9 +349,11 @@ export default function DrawerFrame() {
             <img src={ProfileLogo} alt="Logo" />
           </div>
         </DrawerHeader>
-        <LandingCard />
-        {/* <ChatBox/> */}
-        {/* <InitialCard/> */}
+
+        {props.children}
+        {/* <LandingCard />
+        <ChatBox />*/}
+        {/* <InitialCard /> */}
 
         <PromptField />
       </Box>

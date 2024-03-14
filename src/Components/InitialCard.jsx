@@ -1,20 +1,16 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
+import React from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import { Box, Paper, Grid, IconButton, Typography } from "@mui/material";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import Idea from "../images/approval_delegation_FILL0_wght200_GRAD-25_opsz24.png";
-import { IconButton, Typography } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#172214" : "#172214",
   ...theme.typography.body2,
-  borderRadius:"10px",
-  padding: theme.spacing(3),
+  borderRadius: "10px",
+  padding: theme.spacing(2),
   color: theme.palette.text.secondary,
   animation: "fadeIn 0.5s ease-out",
-  animationFillMode: "both", 
+  animationFillMode: "both",
 }));
 
 const fadeInAnimation = `
@@ -31,14 +27,19 @@ const fadeInAnimation = `
 `;
 
 export default function InitialCard() {
+  const theme = useTheme();
+  const navigate = useNavigate();
   React.useEffect(() => {
     const style = document.createElement("style");
     style.textContent = fadeInAnimation;
     document.head.appendChild(style);
-    return () => {
-      document.head.removeChild(style);
-    };
+    return () => document.head.removeChild(style);
   }, []);
+  const handleCardClick = (item) => {
+    // Navigate to a new route on card click
+    // The route can be dynamic based on the item clicked
+    navigate(`/ChatList`);
+  };
 
   return (
     <Box
@@ -49,50 +50,26 @@ export default function InitialCard() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        padding: theme.spacing(2),
       }}
     >
-      <Grid container spacing={2}>
-        <Grid xs={12}>
-        <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-              gap: "19px 0px",
-              paddingLeft:"20px",
-              marginBottom:"40px"
-            }}
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12}>
+          <Typography
+            variant="h4"
+            component="h1"
+            gutterBottom
+            sx={{ color: "#fff", fontWeight: 700 }}
           >
-            <h1
-              style={{
-                margin: "0",
-                height: "23px",
-                position: "relative",
-                fontSize: "40px",
-                fontFamily: "inherit",
-                fontWeight: "700",
-                display: "inline-block",
-              }}
-            >
-              <span style={{ color: "white" }}>{`Hello `}</span>
-              <span style={{ color: "#42ff54" }}>Vipul,</span>
-            </h1>
-            <h1
-              style={{
-                margin: "0",
-                height: "30px",
-                position: "relative",
-                fontSize: "40px",
-                fontWeight: "500",
-                fontFamily: "Alata",
-                color: "grey",
-                display: "inline-block",
-              }}
-            >
-              How can I help you today?
-            </h1>
-          </div>
+            Hello <span style={{ color: "#42ff54" }}>Vipul,</span>
+          </Typography>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{ color: "grey", fontWeight: 500 }}
+          >
+            How can I help you today?
+          </Typography>
         </Grid>
         {[
           "Create an image of an intergalactic event",
@@ -102,24 +79,15 @@ export default function InitialCard() {
           "Write product description",
           "Show risks and benefits of investment",
         ].map((item, index) => (
-          <Grid key={index} item xs={4}>
-            <Item style={{ animationDelay: `${index * 0.2}s` }}>
-              <IconButton sx={{ background: "#42ff54" }}>
+          <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+            <Item
+              style={{ animationDelay: `${index * 0.2}s` }}
+              onClick={() => handleCardClick(item)}
+            >
+              <IconButton sx={{ background: "#42ff54", color: "#fff" }}>
                 <InsertPhotoIcon />
               </IconButton>
-              <Typography
-                sx={{
-                  color: "#ffff",
-                  leadingTrim: "both",
-                  textEdge: "cap",
-                  fontFamily: "Avenir Next",
-                  fontSize: "12px",
-                  marginTop: "25px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "18px",
-                }}
-              >
+              <Typography variant="body2" sx={{ marginTop: 2, color: "#fff" }}>
                 {item}
               </Typography>
             </Item>
