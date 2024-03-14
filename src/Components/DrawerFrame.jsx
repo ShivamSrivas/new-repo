@@ -350,8 +350,9 @@ export default function DrawerFrame() {
           </div>
         </DrawerHeader>
         {/* <LandingCard /> */}
-        {/* <ChatBox/> */}
-        <InitialCard/>
+        <ChatBox/>
+        {/* <InitialCard/> */}
+        
         <PromptField />
       </Box>
     </Box>

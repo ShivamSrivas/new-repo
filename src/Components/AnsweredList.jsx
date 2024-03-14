@@ -11,7 +11,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { IconButton } from "@mui/material";
 import "../style/Answered.css";
 
-export default function AnsweredList({ answerInList }) {
+export default function AnsweredList({ answerInList , openModal }) {
   const [itemsRendered, setItemsRendered] = useState(false);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
