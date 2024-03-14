@@ -8,7 +8,7 @@ import Profile from "../images/ProfileLogo.png";
 import BrandLogo from "../images/LandPage-LOGO.png";
 import { Typography } from "@mui/material";
 import AnsweredList from "./AnsweredList";
-import TransitionsModal from "./TransitionsModal"
+import TransitionsModal from "./TransitionsModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor:
@@ -21,10 +21,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const ChatBox = () => {
-  const [openModal,setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
   const handleClose = () => setOpenModal(false);
 
-  
   const Chats = {
     questionAsked: "Generate my investment report",
     answerHeading:
@@ -44,10 +43,17 @@ const ChatBox = () => {
 
   return (
     <Box sx={{ flexGrow: 1, maxHeight: 800, overflowY: "auto" }}>
-      <TransitionsModal openModal={openModal} answerInList={Chats.answerInList} handleClose={handleClose}/>
+      <TransitionsModal
+        openModal={openModal}
+        answerInList={Chats.answerInList}
+        handleClose={handleClose}
+      />
       <Grid container spacing={0.5} p={2}>
         <Grid item xs={12}>
-          <Item sx={{ display: "flex", alignItems: "center" }}>
+          <Item
+            sx={{ display: "flex", alignItems: "center" }}
+            onClick={() => setOpenModal(true)}
+          >
             <Avatar src={Profile} />
             <Typography
               sx={{
@@ -60,17 +66,16 @@ const ChatBox = () => {
                 fontWeight: 500,
                 lineHeight: "0px",
                 marginLeft: "20px",
-                cursor:"pointer"
+                cursor: "pointer",
               }}
-              onClick={()=>setOpenModal(true)}
-              >
+            >
               {questionAsked}
             </Typography>
           </Item>
         </Grid>
         <Grid item xs={12}>
           <Item sx={{ display: "flex", alignItems: "center" }}>
-            <Avatar src={BrandLogo}/>
+            <Avatar src={BrandLogo} />
             <Typography
               sx={{
                 color: "#ffff",
@@ -89,7 +94,7 @@ const ChatBox = () => {
             </Typography>
           </Item>
           <Item sx={{ display: "flex", marginLeft: "40px" }}>
-            <AnsweredList answerInList={Chats.answerInList}/>
+            <AnsweredList answerInList={Chats.answerInList} />
           </Item>
         </Grid>
       </Grid>
@@ -98,4 +103,3 @@ const ChatBox = () => {
 };
 
 export default ChatBox;
-

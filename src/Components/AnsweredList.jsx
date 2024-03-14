@@ -11,7 +11,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { IconButton } from "@mui/material";
 import "../style/Answered.css";
 
-export default function AnsweredList({ answerInList , openModal }) {
+export default function AnsweredList({ answerInList, openModal }) {
   const [itemsRendered, setItemsRendered] = useState(false);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -22,17 +22,15 @@ export default function AnsweredList({ answerInList , openModal }) {
   }, [answerInList]);
   return (
     <>
-      <List
-       className="list"
-      >
+      <List className="list">
         {answerInList.map((item, index) => (
-          <ListItem key={`item-${index}`}>
+          <ListItem key={`item-${index + 1}`}>
             <ListItemText
               primary={``}
               primaryTypographyProps={{
                 sx: {
                   "&::after": {
-                    content: `'${index+': '+item}'`,
+                    content: `'${index + 1 + ": " + item}'`,
                     animation: `revealText 1s ease-in-out forwards ${index}s`,
                     opacity: 0,
                   },
@@ -43,16 +41,16 @@ export default function AnsweredList({ answerInList , openModal }) {
         ))}
         {itemsRendered && (
           <IconButton
-          sx={{
-            color: "#42ff54",
-            width: "200px",
-            display: "flex",
-            justifyContent: "space-around",
-            alignSelf: "flex-start",
-            animation: "revealText 1s ease-in-out forwards",
-            flexShrink: 0,
-            opacity: 0.8,
-          }}        
+            sx={{
+              color: "#42ff54",
+              width: "200px",
+              display: "flex",
+              justifyContent: "space-around",
+              alignSelf: "flex-start",
+              animation: "revealText 1s ease-in-out forwards",
+              flexShrink: 0,
+              opacity: 0.8,
+            }}
           >
             <ThumbUpOffAltIcon />
             <ThumbDownOffAltIcon />
