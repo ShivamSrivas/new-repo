@@ -3,30 +3,32 @@ import { styled, useTheme } from "@mui/material/styles";
 import { Box, Paper, Grid, IconButton, Typography } from "@mui/material";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import { useNavigate } from "react-router-dom";
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#172214" : "#172214",
-  ...theme.typography.body2,
-  borderRadius: "10px",
-  padding: theme.spacing(2),
-  color: theme.palette.text.secondary,
-  animation: "fadeIn 0.5s ease-out",
-  animationFillMode: "both",
-}));
 
-const fadeInAnimation = `
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
 
-export default function InitialCard() {
+export default function InitialCard({ darkMode }) {
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#172214" : "#172214",
+    ...theme.typography.body2,
+    borderRadius: "10px",
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+    animation: "fadeIn 0.5s ease-out",
+    animationFillMode: "both",
+  }));
+  
+  const fadeInAnimation = `
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
   const theme = useTheme();
   const navigate = useNavigate();
   React.useEffect(() => {

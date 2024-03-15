@@ -115,7 +115,7 @@ const PromptField = () => {
             boxSizing: "border-box",
             fontFamily: "Alata",
             fontWeight: "500",
-            padding: "26px 0px 0px 0px",
+            padding: "23px 0px 0px 0px",
             fontSize: "16px",
             color: "white",
             resize: "none",

@@ -20,13 +20,17 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import LandingCard from "./LandingCard";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import PromptField from "./PromptField";
 import ChatBox from "./ChatBox";
-import InitialCard from "./InitialCard";
-import "../style/DrawerFrame.css";
 
-const drawerWidth = 240;
+import "../style/DrawerFrame.css";
+import { DarkMode } from "@mui/icons-material";
+
+
+export default function DrawerFrame(props) {
+
+  const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -65,7 +69,7 @@ const Drawer = styled(MuiDrawer, {
   whiteSpace: "nowrap",
   boxSizing: "border-box",
   "& .MuiDrawer-paper": {
-    backgroundColor: "#172214",
+    background: darkMode ? "var(--Fill-Blue, radial-gradient(49.77% 45.59% at 48.47% -1.07%, rgba(29, 63, 88, 0.83) 0%, #081017 100%))" : "#061101",
     ...(open && openedMixin(theme)),
     ...(!open && closedMixin(theme)),
   },
@@ -73,8 +77,9 @@ const Drawer = styled(MuiDrawer, {
   ...(!open && closedMixin(theme)),
 }));
 
-export default function DrawerFrame(props) {
+
   const theme = useTheme();
+  const [darkMode,setDarkMode] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const handleDrawerClose = () => {
     setOpen(!open);
@@ -255,6 +260,27 @@ export default function DrawerFrame(props) {
               alignItems: "center",
             }}
           >
+          <DarkModeIcon sx={{ color: darkMode ? "#ffff7e" : "#ffff", cursor: "pointer", mr: 2 }} onClick={()=>{setDarkMode(!darkMode)}}/>
+          {open ? (
+              <Typography
+                sx={{
+                  color: "#ffffff",
+                  cursor: "pointer",
+                  mr: 2,
+                  fontSize: "12px",
+                }}
+              >
+                Theme
+              </Typography>
+            ) : null}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <SettingsIcon sx={{ color: "#ffffff", cursor: "pointer", mr: 2 }} />{" "}
             {open ? (
               <Typography
@@ -299,7 +325,7 @@ export default function DrawerFrame(props) {
         sx={{
           flexGrow: 1,
           p: 3,
-          bgcolor: "#061101",
+          background: darkMode ? "var(--Fill-Blue, radial-gradient(49.77% 45.59% at 48.47% -1.07%, rgba(29, 63, 88, 0.83) 0%, #081017 100%))" : "#061101", 
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -350,7 +376,7 @@ export default function DrawerFrame(props) {
           </div>
         </DrawerHeader>
 
-        {props.children}
+        {React.cloneElement(props.children, { darkMode: darkMode })}
         {/* <LandingCard />
         <ChatBox />*/}
         {/* <InitialCard /> */}
