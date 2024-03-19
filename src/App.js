@@ -1,10 +1,13 @@
-import './App.css';
-import DrawerFrame from "./Components/DrawerFrame.jsx"
-import LandingCard from "./Components/LandingCard.jsx"
+import "./App.css";
+import LandingPage from "./Components/LandingPage.jsx";
+import {store} from "./Store/store.js";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-  <DrawerFrame/>
+    <Provider store={store}>
+      <LandingPage />
+    </Provider>
   );
 }
 
