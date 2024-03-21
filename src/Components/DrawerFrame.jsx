@@ -386,3 +386,4 @@ const Drawer = styled(MuiDrawer, {
     </Box>
   );
 }
+

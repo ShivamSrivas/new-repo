@@ -1,18 +1,13 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import ChatList from "./pages/ChatList";
-import Cards from "./pages/Cards";
+import LandingPage from "./Components/LandingPage.jsx";
+import {store} from "./Store/store.js";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/ChatList" element={<ChatList />} />
-        <Route path="/Cards" element={<Cards />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <LandingPage />
+    </Provider>
   );
 }
 

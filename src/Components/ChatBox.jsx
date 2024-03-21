@@ -1,105 +1,39 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Avatar from "@mui/material/Avatar";
-import Profile from "../images/ProfileLogo.png";
-import BrandLogo from "../images/LandPage-LOGO.png";
-import { Typography } from "@mui/material";
-import AnsweredList from "./AnsweredList";
-import TransitionsModal from "./TransitionsModal";
+import React, { useState } from 'react';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark" ? "transparent" : "transparent",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  animation: "fadeIn 1s", // Added animation here
-}));
+const Chatbox = () => {
+  const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
-const ChatBox = () => {
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleClose = () => setOpenModal(false);
-
-  const Chats = {
-    questionAsked: "Generate my investment report",
-    answerHeading:
-      "To generate an investment report, I would need some specific details such as:",
-    answerSubHeading: "",
-    answerInList: [
-      "Your initial investment amount",
-      "The duration of your investment",
-      "Types of investments (stocks, bonds, mutual funds, etc.)",
-      "Investment returns or losses over the duration",
-      "Any additional contributions or withdrawals made during the investment period",
-      "Any relevant benchmarks or indices for comparison",
-    ],
+  const handleMessageSubmit = (e) => {
+    e.preventDefault();
+    const message = inputValue.trim();
+    if (message !== '') {
+      setMessages([...messages, { text: message, sender: 'user' }]);
+      setInputValue('');
+    }
   };
 
-  const { questionAsked, answerHeading } = Chats;
-
   return (
-    <Box sx={{ flexGrow: 1, maxHeight: 800, overflowY: "auto" }}>
-      <TransitionsModal
-        openModal={openModal}
-        answerInList={Chats.answerInList}
-        handleClose={handleClose}
-      />
-      <Grid container spacing={0.5} p={2}>
-        <Grid item xs={12}>
-          <Item
-            sx={{ display: "flex", alignItems: "center" }}
-            onClick={() => setOpenModal(true)}
-          >
-            <Avatar src={Profile} />
-            <Typography
-              sx={{
-                color: "#42ff54",
-                leadingTrim: "both",
-                textEdge: "cap",
-                fontFamily: "Avenir Next",
-                fontSize: "18px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "0px",
-                marginLeft: "20px",
-                cursor: "pointer",
-              }}
-            >
-              {questionAsked}
-            </Typography>
-          </Item>
-        </Grid>
-        <Grid item xs={12}>
-          <Item sx={{ display: "flex", alignItems: "center" }}>
-            <Avatar src={BrandLogo} />
-            <Typography
-              sx={{
-                color: "#ffff",
-                leadingTrim: "both",
-                textEdge: "cap",
-                fontFamily: "Avenir Next",
-                animation: "revealText 1s ease-in-out forwards",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "32px",
-                marginLeft: "20px",
-              }}
-            >
-              {answerHeading}
-            </Typography>
-          </Item>
-          <Item sx={{ display: "flex", marginLeft: "40px" }}>
-            <AnsweredList answerInList={Chats.answerInList} />
-          </Item>
-        </Grid>
-      </Grid>
-    </Box>
+    <div style={{ width: '300px', margin: '20px auto', border: '1px solid #ccc', borderRadius: '8px', overflow: 'hidden' }}>
+      <div style={{ maxHeight: '400px', overflowY: 'auto', padding: '10px' }}>
+        {messages.map((msg, index) => (
+          <div key={index} style={{ backgroundColor: msg.sender === 'user' ? '#007bff' : '#f0f0f0', color: msg.sender === 'user' ? '#fff' : '#000', padding: '8px 12px', marginBottom: '8px', borderRadius: '6px', maxWidth: '70%' }}>
+            {msg.text}
+          </div>
+        ))}
+      </div>
+      <form onSubmit={handleMessageSubmit} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', backgroundColor: '#f9f9f9' }}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Type a message..."
+          style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc', marginRight: '10px' }}
+        />
+        <button type="submit" style={{ padding: '8px 16px', border: 'none', borderRadius: '4px', backgroundColor: '#007bff', color: '#fff', cursor: 'pointer' }}>Send</button>
+      </form>
+    </div>
   );
 };
 
-export default ChatBox;
+export default Chatbox;
