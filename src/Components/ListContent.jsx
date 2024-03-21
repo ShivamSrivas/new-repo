@@ -3,8 +3,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
+import { useSelector } from "react-redux";
 
 export default function ListContent() {
+  const theme = useSelector((state) => state.landingPage.theme);
   const dataArray = [
     {
       date: "4 March 2024",
@@ -65,7 +67,7 @@ export default function ListContent() {
       date: "8 March 2024",
       items: [
         "What is ESG",
-        "How ESG Works",
+        "How ESG Works", 
         "How ESG impact us",
         "Wealth Management",
         "Articles about wealth",
@@ -94,8 +96,21 @@ export default function ListContent() {
         color: "#3F9CFF",
         position: "relative",
         overflow: "hidden auto",
-        maxHeight: 600,
+        maxHeight: 400,
         "& ul": { padding: 0 },
+        "&::-webkit-scrollbar": {
+          width: "6px", // Adjust as needed for the thickness of the scrollbar
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "rgba(0, 0, 0, 0.3)", // Adjust the color of the thumb
+          borderRadius: "3px", // Adjust the border radius of the thumb
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjust the hover color of the thumb
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "transparent", // Set the background color of the track to transparent
+        },
       }}
       subheader={<li/>}
     >
@@ -104,7 +119,7 @@ export default function ListContent() {
           <ul>
             <ListSubheader
               style={{
-                color: "#3F9CFF",
+                color: theme === "Dark" ? "#3F9CFF": "#968864",
                 background: "transparent",
                 fontFamily: "Poppins",
                 fontSize: "11px",

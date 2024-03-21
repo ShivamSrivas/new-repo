@@ -7,8 +7,18 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
+import { useDispatch } from "react-redux";
+import {
+  changeInteractiveCard,
+  changeScreen,
+} from "../Features/LandingPageSlice";
 
 const ActionAreaCard = ({ index, image, storeState, storeStyle }) => {
+  const dispatch = useDispatch();
+  const handleCardClick = () => {
+    dispatch(changeInteractiveCard(image.label));
+    dispatch(changeScreen("interactiveCard"));
+  };
   return (
     <Card
       sx={{
@@ -20,6 +30,7 @@ const ActionAreaCard = ({ index, image, storeState, storeStyle }) => {
         marginBottom: index === 1 ? "50px" : "",
         maxWidth: 300,
       }}
+      onClick={handleCardClick}
     >
       <CardActionArea sx={storeState.CardActionArea}>
         <CardMedia
@@ -56,12 +67,22 @@ function LandingCard() {
   const state = useSelector((state) => state.landingCard);
   const style = theme === "Dark" ? state.DarkTheme : state.LightTheme;
   return (
-    <Box sx={{ maxWidth: 1000, flexGrow: 1,display:"flex",justifyContent:"center",flexDirection:"column"}}>
+    <Box
+      sx={{
+        maxWidth: 1000,
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
       <Grid container spacing={2} rowGap={2}>
         <Grid item xs={12} display={"flex"} flexDirection={"column"} rowGap={4}>
           <Typography sx={style.ContentHeading}>
             Hello
-            <Typography gutterBottom sx={style.ContentHeadingName}>Vipul</Typography>
+            <Typography gutterBottom sx={style.ContentHeadingName}>
+              Vipul
+            </Typography>
           </Typography>
 
           <Typography gutterBottom sx={style.ContentSubHeading}>
@@ -83,7 +104,7 @@ function LandingCard() {
           </Box>
         </Grid>
       </Grid>
-      </Box>
+    </Box>
   );
 }
 

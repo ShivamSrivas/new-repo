@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../style/global.css";
-import StopWatchIcon from "../images/StopWatchIcon.png";
+import StopWatchIcon from "../Images/StopWatchIcon.png";
 
 function Stopwatch() {
   const [elapsedTime, setElapsedTime] = useState(0);

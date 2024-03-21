@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import LandingCard from "../Components/LandingCard";
 import ProfileLogo from "../Images/ProfileLogo.png";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -14,18 +13,21 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Avatar from "@mui/material/Avatar";
 import BrandLogo from "../Images/BrandLogo.png";
-import { Divider, Typography,Grid } from "@mui/material";
+import { Divider, Typography, Grid } from "@mui/material";
 import "../Style/global.css";
 import { LandingStyle } from "../Style/LandingPagStyle";
 import LightBrandLogo from "../Images/LightBrandLogo.png";
 import "../Style/font.css";
 import PromptBox from "./PromptBox";
-import ChatBox from "./ChatBox";
-import { toggleDrawer, themeChanger } from "../Features/LandingPageSlice";
+import ListContent from "../Components/ListContent";
+import {
+  toggleDrawer,
+  themeChanger,
+  changeScreen,
+} from "../Features/LandingPageSlice";
 import { DarkMode } from "@mui/icons-material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import ListInChat from "../utlis/ListInChat";
 const drawerWidth = 240;
 
 const openedMixin = (theme, state) => ({
@@ -117,11 +119,17 @@ export default function MiniDrawer() {
     dispatch(themeChanger());
   };
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box sx={{ display: "flex", height: "100vh", overflow: "hidden auto" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar sx={LandingStyle.themeHeaderImage}>
-          <div className="lightThemeImageSpan">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <span style={{ display: "flex" }}>
               <img
                 src={state.theme === "Dark" ? BrandLogo : LightBrandLogo}
@@ -136,6 +144,7 @@ export default function MiniDrawer() {
                     ? state.style.darkTheme.brandName
                     : state.style.lightTheme.brandName
                 }
+                onClick={() => dispatch(changeScreen("landingCard"))}
               >
                 Investment.AI
               </Typography>
@@ -178,17 +187,20 @@ export default function MiniDrawer() {
           }}
         >
           {open && (
-            <Button
-              sx={
-                state.theme === "Dark"
-                  ? state.style.darkTheme.addActivityButton
-                  : state.style.lightTheme.addActivityButton
-              }
-              variant="outlined"
-              startIcon={<AddIcon />}
-            >
-              Add Activity
-            </Button>
+            <>
+              <Button
+                sx={
+                  state.theme === "Dark"
+                    ? state.style.darkTheme.addActivityButton
+                    : state.style.lightTheme.addActivityButton
+                }
+                variant="outlined"
+                startIcon={<AddIcon />}
+              >
+                Add Activity
+              </Button>
+              <ListContent />
+            </>
           )}
           <Divider color="red" />
         </div>
@@ -232,7 +244,6 @@ export default function MiniDrawer() {
           </div>
         </div>
       </Drawer>
-
       <Box
         sx={
           state.theme === "Dark"
@@ -240,28 +251,40 @@ export default function MiniDrawer() {
             : state.style.lightTheme.mainContainer
         }
       >
-        <Grid container spacing={2} display={"flex"} justifyContent={"space-around"}>
-          <Grid item xs={12} display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"}>
-          <LandingCard />
-          </Grid>
-          <Grid item xs={12} display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"}>
-          <PromptBox />
-          </Grid>
-        </Grid>
-        {/* <Box
+        <Box
           sx={{
-            flex: "1 1 auto",
+            display: "flex",
+            justifyContent: "center",
+            height: "90%",
+            overflow: "hidden auto",
+            padding: "4%",
+            "&::-webkit-scrollbar": {
+              width: "6px", // Adjust as needed for the thickness of the scrollbar
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "rgba(0, 0, 0, 0.3)", // Adjust the color of the thumb
+              borderRadius: "3px", // Adjust the border radius of the thumb
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // Adjust the hover color of the thumb
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "transparent", // Set the background color of the track to transparent
+            },
+          }}
+        >
+          {state && state.pages[state.pageToBeRender]}
+        </Box>
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
           }}
         >
-          <LandingCard />
-        </Box>
-        <Box display={"flex"} alignItems={"center"} flexDirection={"column"}>
           <PromptBox />
-        </Box> */}
+        </Box>
       </Box>
     </Box>
   );
